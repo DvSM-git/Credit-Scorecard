@@ -2,7 +2,7 @@
 
 A side project where I built a probability-of-default scorecard on about 1.35 million LendingClub loans (2007–2018). I tried to follow roughly how banks build these models for regulatory use: an interpretable logistic regression on binned variables, tested on later loans the model never saw, and calibrated conservatively.
 
-Everything is in one notebook: `notebooks/credit_scorecard.ipynb`.
+Everything is in one notebook: `credit_scorecard.ipynb`.
 
 ## Data
 
@@ -57,7 +57,7 @@ Smaller points:
 
 ```
 pip install -r requirements.txt
-jupyter notebook notebooks/credit_scorecard.ipynb
+jupyter notebook credit_scorecard.ipynb
 ```
 
 Then run all cells.
