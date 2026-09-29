@@ -8,13 +8,13 @@ Everything is in one notebook: `credit_scorecard.ipynb`.
 
 The loan data is the [LendingClub dataset on Kaggle](https://www.kaggle.com/datasets/wordsforthewise/lending-club) (`accepted_2007_to_2018Q4.csv.gz`). It's too big for GitHub, so download it and put it in `data/raw/`. The data dictionary is included in `metadata/`.
 
-Before modelling, I:
+Before modelling:
 
 - checked every column against LendingClub's data dictionary. One variable had a different name in the two (`verified_status_joint` vs `verification_status_joint`), which I fixed;
 - kept only closed loans (1,348,099), and counted charged-off or defaulted loans as defaults (about 20%). This is a shortcut with a real cost, see below;
 - left out LendingClub's own grade and interest rate, so the model can't just copy the lender's assessment.
 
-I didn't use the rejected applications. That's a limitation, not a design choice (see below).
+Didn't use the rejected applications. (see below).
 
 ## What the notebook does
 
@@ -35,13 +35,13 @@ I didn't use the rejected applications. That's a limitation, not a design choice
 | PSI, train vs test | 0.002 |
 | Largest gap between predicted and actual default rate, by score decile | 1.7 points |
 
-The model ranks borrowers moderately well, which is about what you'd expect without the lender's own grade. The scores are very stable over time, and calibration holds up well. Later loans defaulted more often in the data than earlier ones (21.5% against 17.5%), so the safety margin kept the average PD close to reality. But part of that jump is probably caused by how I built the sample (see below), so I wouldn't read too much into it.
+The model ranks borrowers moderately well, which is about what you'd expect without the lender's own grade. The scores are very stable over time, and calibration holds up well. Later loans defaulted more often in the data than earlier ones (21.5% against 17.5%), so the safety margin kept the average PD close to reality. But part of that jump is probably caused by how the sample was built (see below).
 
 ![Score distribution by outcome](figures/score_distribution_oot.png)
 
 ![Calibration by score decile](figures/calibration_deciles_oot.png)
 
-## Limitations and what I'd do next
+## Limitations and what to do next
 
 The two biggest problems are about which loans end up in the data:
 
